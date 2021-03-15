@@ -1,3 +1,4 @@
+import sys
 import csv
 from datetime import time
 
@@ -21,26 +22,34 @@ class RateModel:
             self.load_model(filename)
 
     def load_model(self, filename):
-        csv_file = open(filename)
-        csv_reader = csv.DictReader(csv_file)
-        for row in csv_reader:
-            self.update_model(row)
+        try:
+            csv_file = open(filename)
+            csv_reader = csv.DictReader(csv_file)
+            for row in csv_reader:
+                self.update_model(row['day'], row['start'], row['end'], row['rate'])
+        except FileNotFoundError as e:
+            sys.exit("ERROR: File not found: '%s'" % filename)
+        except KeyError as e:
+            sys.exit("ERROR: Bad file format: '%s'" % filename)
 
-    def update_model(self, rate):
-        start_time = time.fromisoformat(rate['start'])
-        end_time = time.fromisoformat(rate['end'])
-        first_hour = _round_hour(start_time)
-        last_hour = ((_round_hour(end_time)-1) % DAYHOURS) + 1
-        week_day = rate['day']
-        rate_value = int(rate['rate'])
-        for pos in range(first_hour, last_hour):
-            self.rate_map[week_day][pos] = rate_value
+    def update_model(self, weekday, start, end, rate):
+        try:
+            if weekday not in WEEKDAYS:
+                raise ValueError("'%s' is not a valid weekday" % weekday)
+            start_time = time.fromisoformat(start)
+            end_time = time.fromisoformat(end)
+            first_hour = _round_hour(start_time)
+            last_hour = ((_round_hour(end_time) - 1) % DAYHOURS) + 1
+            rate_value = int(rate)
+            for pos in range(first_hour, last_hour):
+                self.rate_map[weekday][pos] = rate_value
+        except ValueError as e:
+            sys.exit("ERROR: Invalid input: " + str(e) )
 
     def get_model(self, weekday):
         try:
             day_model = self.rate_map[weekday]
         except KeyError:
-            print("Invalid day")
             day_model = None
         return day_model
 
