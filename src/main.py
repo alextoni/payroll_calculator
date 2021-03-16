@@ -10,4 +10,4 @@ if __name__ == '__main__':
             schedule = ScheduleModel(input_line)
             payment = schedule.calculate_payment(rate_model)
             # print(schedule.get_name(), schedule.get_work_intervals())
-            print("The amount to pay", schedule.get_name(), "is", payment, "USD")
+            print("The amount to pay", schedule.get_name(), "is", round(payment,2), "USD")

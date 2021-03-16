@@ -44,7 +44,7 @@ class RateModel:
             for pos in range(first_hour, last_hour):
                 self.rate_map[weekday][pos] = rate_value
         except ValueError as e:
-            sys.exit("ERROR: Invalid input: " + str(e) )
+            sys.exit("ERROR: Invalid input: " + str(e))
 
     def get_model(self, weekday):
         try:
