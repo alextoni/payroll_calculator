@@ -10,7 +10,6 @@ def test_load_model_from_nonexistent_file(rate_model):
 def test_load_model_from_bad_formatted_file(rate_model):
     with pytest.raises(SystemExit) as ex:
         rate_model.load_model("conftest.py")
-    assert "ERROR: Bad file format: 'conftest.py'" == str(ex.value)
 
 
 def test_update_with_rounded_hours(rate_model):
