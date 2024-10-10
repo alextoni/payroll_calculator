@@ -5,8 +5,8 @@ __author__ = "Alejandro Perez"
 
 import argparse
 
-from payroll.RateModel import RateModel
-from payroll.ScheduleModel import ScheduleModel
+from src.payroll.RateModel import RateModel
+from src.payroll.ScheduleModel import ScheduleModel
 
 
 def main():

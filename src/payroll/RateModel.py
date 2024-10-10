@@ -8,7 +8,7 @@ import sys
 import csv
 from datetime import time
 
-from .constants import *
+from src.payroll.constants import *
 
 
 def _round_hour(t: time):

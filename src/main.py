@@ -1,5 +1,5 @@
-from payroll.RateModel import RateModel
-from payroll.ScheduleModel import ScheduleModel
+from src.payroll.RateModel import RateModel
+from src.payroll.ScheduleModel import ScheduleModel
 
 if __name__ == '__main__':
     rate_model = RateModel("config/default_rates.csv")

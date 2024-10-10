@@ -8,8 +8,8 @@ import sys
 import re
 from datetime import time
 
-from .constants import *
-from .RateModel import RateModel
+from src.payroll.constants import *
+from src.payroll.RateModel import RateModel
 
 
 def _parse_input(raw_input_line):
