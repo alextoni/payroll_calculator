@@ -62,17 +62,17 @@ def test_update_with_invalid_hours(rate_model):
     assert "ERROR: Invalid input: minute must be in 0..59" == str(ex.value)
 
 
-def test_update_with_invalid_rate(rate_model):
+def test_update_with_invalid_rate_2(rate_model):
     with pytest.raises(SystemExit) as ex:
         rate_model.update_model('FR', '03:00', '20:00', 'twenty')
     assert "ERROR: Invalid input: invalid literal for int() with base 10: 'twenty'" == str(ex.value)
 
 
-def test_get_model_with_valid_day(rate_model):
+def test_get_model_with_valid_day_2(rate_model):
     day_model = rate_model.get_model("MO")
     assert [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] == day_model
 
 
-def test_get_model_with_invalid_day(rate_model):
+def test_get_model_with_invalid_day_2(rate_model):
     day_model = rate_model.get_model("Monday")
     assert day_model is None
